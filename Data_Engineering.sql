@@ -1,4 +1,6 @@
---create tables for schema
+--Create tables for schema
+
+--Create employee table 
 
 CREATE TABLE employees (
     emp_no INT   NOT NULL,
@@ -13,6 +15,8 @@ CREATE TABLE employees (
      )
 );
 
+--Create department table
+
 CREATE TABLE departments (
     dept_no VARCHAR(30)   NOT NULL,
     dept_name VARCHAR(30)   NOT NULL,
@@ -21,12 +25,16 @@ CREATE TABLE departments (
      )
 );
 
+--Create department manager table
+
 CREATE TABLE dept_manager (
     dept_no VARCHAR(30)   NOT NULL,
     emp_no INT   NOT NULL,
     CONSTRAINT pk_dept_manager PRIMARY KEY (
         dept_no, emp_no 
 );
+
+--Create department employee table
 
 CREATE TABLE dept_emp (
     emp_no INT   NOT NULL,
@@ -35,6 +43,7 @@ CREATE TABLE dept_emp (
         dept_no, emp_no
 );
 
+--Create salaries table
 CREATE TABLE salaries (
     emp_no INT   NOT NULL,
     salary INT   NOT NULL,
@@ -42,12 +51,16 @@ CREATE TABLE salaries (
         emp_no
 );
 
+--Create titles table
+
 CREATE TABLE titles (
     title_id VARCHAR(30)   NOT NULL,
     title VARCHAR(30)   NOT NULL,
     CONSTRAINT pk_titles PRIMARY KEY (
         title_id
 );
+
+--Create foreign key for tables created
 
 ALTER TABLE dept_manager ADD CONSTRAINT fk_dept_manager_dept_no FOREIGN KEY(dept_no)
 REFERENCES departments (dept_no);
@@ -67,5 +80,6 @@ REFERENCES employees (emp_no);
 ALTER TABLE employees ADD CONSTRAINT fk_emp_title FOREIGN KEY(emp_title_id)
 REFERENCES titles (title_id);
 
+--Possible change
 --ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_title_id" FOREIGN KEY("title_id")
 --REFERENCES "employees" ("emp_title_id");
